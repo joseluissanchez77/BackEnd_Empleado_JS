@@ -40,7 +40,7 @@ describe('Empleados', function () {
 
 
     describe('PUT - Actualizar empleado', function () {
-        it('Debería devolver el código de estado 200 si se actualizo el empleado y el encabezado de ubicación', function (done) {
+        it('Debería devolver el código de estado 200 si se actualizo el empleado y el encabezado de ubicación', async () => {
 
             let idEmpleado = '65176b08aa1866c80346e550';
             let empleado = {
@@ -51,30 +51,24 @@ describe('Empleados', function () {
                 "correo": "sanchezbaquejoseluis@gmail.com"
             }
 
-            // Primero, verifica si el empleado existe
-            request.get(`empleados/${idEmpleado}`)
+            // Verifica si el empleado existe
+            const getResponse = await request
+                .get(`empleados/${idEmpleado}`)
                 .set("Aceptado", "application/json")
                 .expect("Content-Type", /json/)
-                .expect(200)
-                .end((err, res) => {
-                    if (err) return done(err);
+                .expect(200);
 
-                    // Asegúrate de que el empleado exista antes de intentar actualizarlo
-                    if (!res.body) {
-                        return done(new Error('El empleado no existe'));
-                    }
+            // Asegúrate de que el empleado exista antes de intentar actualizarlo
+            if (!getResponse.body) {
+                throw new Error('El empleado no existe');
+            }
 
-                    // Si el empleado existe, procede a actualizarlo
-                    request.put(`empleados/${idEmpleado}`)
-                        .send(empleado)
-                        .set("Aceptado", "application/json")
-                        .expect("Content-Type", /json/)
-                        .expect(200)
-                        .end((err) => {
-                            if (err) return done(err);
-                            done();
-                        });
-                });
+            await request
+                .put(`empleados/${idEmpleado}`)
+                .send(empleado)
+                .set("Aceptado", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
         });
     });
 
@@ -100,33 +94,21 @@ describe('Empleados', function () {
     });
 
     describe('DELETE - Eliminar empleado por ID', () => {
-        it('Debería devolver el código de estado 200 si el empleado se eliminó con éxito', (done) => {
+        it('Debería devolver el código de estado 200 si el empleado se eliminó con éxito', async () => {
             const idEmpleado = '651815756ddaa8a81c035e8d';
 
             request.delete(`empleado/${idEmpleado}`)
                 .set('Accept', 'application/json')
-                .expect(200)
-                .end((err, res) => {
-                    if (err) {
-                        return done(err);
-                    }
-                    done();
-                });
+                .expect(200);
         });
 
-        it('Debería devolver el código de estado 404 si el empleado no existe', (done) => {
+        it('Debería devolver el código de estado 404 si el empleado no existe', async () => {
             // Supongamos que intentamos eliminar un empleado con un ID que no existe
             const idEmpleadoNoExistente = '65176b08aa1866c80346e550';
 
             request.delete(`empleado/${idEmpleadoNoExistente}`)
                 .set('Accept', 'application/json')
-                .expect(404)
-                .end((err, res) => {
-                    if (err) {
-                        return done(err);
-                    }
-                    done();
-                });
+                .expect(404);
         });
     });
 
