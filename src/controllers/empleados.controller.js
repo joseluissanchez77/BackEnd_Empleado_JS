@@ -115,4 +115,13 @@ empleadoCtrl.deleteEmpleado = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 }
+
+
+empleadoCtrl.getHolaMundo = async (req, res) => {
+    try {
+        res.json({ data: "Hola Jose Sanchez", status: "success" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
 module.exports = empleadoCtrl;
