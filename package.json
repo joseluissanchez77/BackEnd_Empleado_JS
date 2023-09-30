@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",

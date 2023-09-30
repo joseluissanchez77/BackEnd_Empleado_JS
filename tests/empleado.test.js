@@ -22,7 +22,7 @@ describe('Empleados', function () {
                 "nombre": "jose test",
                 "cargo": "desarrollador test",
                 "departamento": "sistemas test",
-                "sueldo": 1400,
+                //"sueldo": 1400,
                 "correo": "sanchezbaquejoseluis@gmail.com"
             }
 
