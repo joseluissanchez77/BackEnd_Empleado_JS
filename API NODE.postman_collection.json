@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "d2495ddc-bb7d-45ed-b37c-9cba95753296",
+		"name": "API NODE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4138448",
+		"_collection_link": "https://red-robot-601337.postman.co/workspace/PATRONES-DE-DISE%C3%91O-DE-APIS-~ba0d9f65-b88b-4f00-a819-57f3b79f717c/collection/4138448-d2495ddc-bb7d-45ed-b37c-9cba95753296?action=share&source=collection_link&creator=4138448"
+	},
+	"item": [
+		{
+			"name": "lista de empleados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/empleados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"empleados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "guadar empleado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"jose\",\r\n    \"cargo\": \"desarrollador\",\r\n    \"departamento\": \"sistemas\",\r\n    \"sueldo\": 1400,\r\n    \"correo\":\"sanchezbaquejoseluis@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/empleados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"empleados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar empleado",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/empleados/65176b08aa1866c80346e550",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"empleados",
+						"65176b08aa1866c80346e550"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "empleado by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/empleados/6517f7b689521c0d3167b14f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"empleados",
+						"6517f7b689521c0d3167b14f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"juan\",\r\n    \"cargo\": \"periodista\",\r\n    \"departamento\": \"comunicaciones\",\r\n    \"sueldo\": 800,\r\n    \"correo\": \"sanchezbaquejoseluis@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/empleados/6517f7b689521c0d3167b14f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"empleados",
+						"6517f7b689521c0d3167b14f"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -48,19 +48,13 @@ empleadoCtrl.createEmpleado = async (req, res) => {
         console.log(empleado);
         await empleado.save();
 
-        // await transporter.sendMail({
-        //     from: 'areaspepelucho@gmail.com', // sender address
-        //     to: 'sanchezbaquejoseluis@gmail.com', // list of receivers
-        //     subject: "Hello ✔", // Subject line
-        //     text: "Hello world?", // plain text body
-        //     html: "<b>Hello world?</b>", // html body
-        // });
+        const name = req.body.nombre;
         await transporter.sendMail({
-            from: '"Fred Foo 👻" <noreply@test.com>', // sender address
+            from: '"Correo de Registro" <noreply@test.com>', // sender address
             to: req.body.correo, // list of receivers
-            subject: "Hello ✔", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>", // html body
+            subject: "Correo de Registro ✔", // Subject line
+            text: `Usted se ha registrado exitosamente en el sistema. ${name}`, // plain text body
+            html: `<b>Usted se ha registrado exitosamente en el sistema. ${name}</b>`, // html body
         });
         //res.json('status: Datos guardados');
         res.json({ data: empleado, status: "success" });
@@ -85,7 +79,7 @@ empleadoCtrl.getEmpleado = async (req, res) => {
             })
         }
 
-        res.json({ data: empl, status: "success" });
+        res.status(200).json({ data: empl, status: "success" });
 
     } catch (err) {
         res.status(500).json({ error: err.message });
