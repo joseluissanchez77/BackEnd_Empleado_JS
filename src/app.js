@@ -18,6 +18,8 @@ app.use(cors());
 //routes
 app.use('/api/empleados', require('./routes/empleados.routes'))
 
+app.get('/',(req,res)=> res.json('HOLA JOSE SANCHEZ'))
+
 module.exports = app;
 
 
