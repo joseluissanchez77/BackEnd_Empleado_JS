@@ -1,6 +1,7 @@
 const empleadoCtrl = {};
 const Empleado = require('../models/Empleado')
 const nodemailer = require("nodemailer");
+const empleadoRepository = require("../repositories/empleadoRepositorio");
 
 // const mongoose = require('mongoose');
 
@@ -25,7 +26,10 @@ const transporter = nodemailer.createTransport({
 
 empleadoCtrl.getEmpleados = async (req, res) => {
     try {
-        const empleados = await Empleado.find();
+        //const empleados = await Empleado.find();
+        //aplicando patron repository
+        const empleados = await empleadoRepository.getAllEmpleados();
+
         res.json({ data: empleados, status: "success" });
         // res.json(empleados);
         //res.send('get empleados')
@@ -46,7 +50,10 @@ empleadoCtrl.createEmpleado = async (req, res) => {
             correo: req.body.correo
         });
         console.log(empleado);
-        await empleado.save();
+
+        //await empleado.save();
+        //aplicando patron repository
+        await empleadoRepository.createEmpleado(empleado);
 
         const name = req.body.nombre;
         await transporter.sendMail({
@@ -70,7 +77,9 @@ empleadoCtrl.getEmpleado = async (req, res) => {
     try {
 
         const idEmp = req.params.id;
-        const empl = await Empleado.findById({ _id: idEmp });
+        //const empl = await Empleado.findById({ _id: idEmp });
+        //aplicando patron repository
+        const empl = await empleadoRepository.getEmpleadoById(idEmp);
         // res.send({_id: id});
 
         if (!empl) {
@@ -87,7 +96,9 @@ empleadoCtrl.getEmpleado = async (req, res) => {
 }
 empleadoCtrl.editEmpleado = async (req, res) => {
     try {
-        const empl = await Empleado.findByIdAndUpdate(req.params.id, req.body);
+        //const empl = await Empleado.findByIdAndUpdate(req.params.id, req.body);
+        //aplicando patron repository
+        const empl = await empleadoRepository.updateEmpleado(req.params.id, req.body);
 
         if (!empl) {
             return res.status(404).json({
@@ -102,7 +113,9 @@ empleadoCtrl.editEmpleado = async (req, res) => {
 }
 empleadoCtrl.deleteEmpleado = async (req, res) => {
     try {
-        const empl = await Empleado.findByIdAndDelete(req.params.id);
+        // const empl = await Empleado.findByIdAndDelete(req.params.id);
+        //aplicando patron repository
+        const empl = await empleadoRepository.deleteEmpleado(req.params.id);
 
         if (!empl) {
             return res.status(404).json({
